@@ -4,15 +4,13 @@
 #include <iostream>
 using namespace std;
 
-
+int current_level = 0;
 
 class ntakey{
     public:
         ntakey *parent_key;
-        int own_recursion_level;
-        int own_id = 666;
+        int own_id;
         string own_action;
-        string child_action;
         vector<ntakey> child_key;
         
         int has_child(int child_id, int *child_vector_id){
@@ -28,7 +26,12 @@ class ntakey{
             return 0;
         }
 
-        void execute(){
+        void add_empty_child(){
+
+        }
+
+        void execute()
+        {
             printf("command");
         }
         
@@ -44,14 +47,12 @@ class ntakey{
                 if(numbers_arr.empty()){
                     child_key.at(child_vector_id).execute();
                 }
-
                 else{
                     child_key.at(child_vector_id).execute_recursive(numbers_arr);
                 }
             }
         }
 };
-
 
 
 void SplitString(string s, vector<int> &v){
