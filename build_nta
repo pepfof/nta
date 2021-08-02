@@ -1,0 +1,2 @@
+g++ ./nta_parser.cpp -o ./nta_parser
+./nta_parser
