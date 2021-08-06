@@ -1,2 +1,2 @@
-g++ ./nta_parser.cpp -o ./nta_parser.o
-./nta_parser.o
+g++ ./src/nta_main.cpp -o ./bin/nta_main.o -lncurses
+./bin/nta_main.o $@
