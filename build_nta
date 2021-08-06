@@ -1,2 +1,2 @@
-g++ ./src/nta_main.cpp -o ./bin/nta_main.o -lncurses
+g++ ./src/nta_main.cpp -o ./bin/nta_main.o
 ./bin/nta_main.o $@

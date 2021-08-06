@@ -9,7 +9,7 @@
 
 using namespace std;
 
-bool nta_report_allowed_levels[5] = {0};
+bool nta_report_allowed_levels[6] = {0};
 
 void nta_report_determine_levels(int argc, char *argv[]){
     for (int i=1; i< argc; i++) {
@@ -33,6 +33,10 @@ void nta_report_determine_levels(int argc, char *argv[]){
     {
 			nta_report_allowed_levels[4]=1;
 	}
+    else if (strcmp(argv[i], "--formatting") == 0) 
+    {
+			nta_report_allowed_levels[5]=1;
+	}
     else if (strcmp(argv[i], "--verbose") == 0) 
     {
 			nta_report_allowed_levels[0]=1;
@@ -41,14 +45,18 @@ void nta_report_determine_levels(int argc, char *argv[]){
             nta_report_allowed_levels[3]=1;
             nta_report_allowed_levels[4]=1;
 	}
+    else if (strcmp(argv[i], "--noexpand") == 0) 
+    {
+            nta_report_allowed_levels[3]=0;
+	}
     else printf("Help text\n");
  }
 }
 
-void nta_report(const int level, const string report){
-    if(level<=4){
-    if(nta_report_allowed_levels[level]){
-    switch (level){
+void nta_report(const int type, const string report){
+    if(type<=5){
+    if(nta_report_allowed_levels[type]){
+    switch (type){
         case 0: 
             printf("[WARN] ");
             break;
@@ -65,7 +73,6 @@ void nta_report(const int level, const string report){
             printf("[DEBUG] ");
             break;
         default:
-            printf("[???] ");
             break;
         }
     printf("%s\n", report.c_str());
