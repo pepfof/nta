@@ -58,8 +58,8 @@ int main(int argc, char *argv[])
     vector<int> v = { 0, 1, 5, 16, 8 };
     vector<int> ex;
     vector<int> va = { 0, 1 };
-    vector<string> ab = { "echo 'this is level NTA#0'","echo but we are switching to NTA#2NTA~NTA#2", "caja &", "hi dads lol", "bam" };
-    vector<string> a = { "echo sth else","echo but we are switching to NTA#2NTA~NTA#2", "caja &", "hi dads lol", "bam" };
+    vector<string> ab = { "echo 'this is level NTA#0'","echo but we are switching to NTA#2NTA~NTA#2", "killall nta", "hi dads lol", "bam" };
+    vector<string> a = { "echo this is level NTA#0","echo but we are switching to NTA#2NTA~NTA#2", "caja &", "hi dads lol", "bam" };
     ntakey testkey(0, "");
 
 
@@ -87,6 +87,10 @@ int main(int argc, char *argv[])
                 if(userinput=="list") {
                     testkey.list_recursively(0, 0);
                     printf("\n");
+                    }
+                else if(userinput=="quit") {
+                    nta_report(2, "Quit by user");
+                    exit(0);
                     }
             }
     }

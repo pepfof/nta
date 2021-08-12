@@ -120,7 +120,7 @@ public:
         printf("%d: %s\n", own_id, own_action.c_str());
         }
         else if(level>1){
-            printf(temp.insert(0, (level-2)*2, ' ').c_str());
+            printf("%s",temp.insert(0, (level-2)*2, ' ').c_str());
             printf("%d: %s\n", own_id, own_action.c_str());}
         else if(level==1){
             printf("\nLAYER %d: %s\n", own_id, own_action.c_str());

@@ -8,7 +8,7 @@
 
 
 using namespace std;
-
+string key_file;
 bool nta_report_allowed_levels[6] = {0};
 
 void nta_report_determine_levels(int argc, char *argv[]){
@@ -37,6 +37,18 @@ void nta_report_determine_levels(int argc, char *argv[]){
     {
 			nta_report_allowed_levels[5]=1;
 	}
+    else if (strcmp(argv[i], "-f") == 0) 
+    {
+            if(i+1<argc){
+            key_file = argv[i+1];
+            }
+            else{
+                printf("No file passed.\n");
+                exit(66);
+            }
+            i++;
+
+	}
     else if (strcmp(argv[i], "--verbose") == 0) 
     {
 			nta_report_allowed_levels[0]=1;
@@ -49,7 +61,11 @@ void nta_report_determine_levels(int argc, char *argv[]){
     {
             nta_report_allowed_levels[3]=0;
 	}
-    else printf("Help text\n");
+    else 
+    {
+        printf("Help text\n");
+        exit(64);
+    }
  }
 }
 
