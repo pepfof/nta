@@ -40,6 +40,7 @@ int count_spaces(const string& s)
 			return counter;
 		}
 	}
+	return 0;
 }
 
 
