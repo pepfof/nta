@@ -69,7 +69,11 @@ void nta_read_config_to_key(const string file, ntakey& key)
 			{
 				continue;
 			}
-		}
+            else
+            {
+                ignore = false;
+            }
+        }
 
 		for (int i = 0; i <= (last_spaces - spaces); i += 4)
 		{
