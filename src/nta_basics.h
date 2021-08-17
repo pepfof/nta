@@ -13,6 +13,7 @@ using namespace std;
 string nta_keymap_file = "/nta.map";
 
 bool nta_report_allowed_levels[7] = {0, 0, 0, 0, 0, 0, 1};
+bool nta_noexecute = 0;
 
 void nta_report_determine_levels(int argc, char *argv[]){
     const char *homedir;
@@ -21,7 +22,7 @@ void nta_report_determine_levels(int argc, char *argv[]){
         homedir = getpwuid(getuid())->pw_dir;
     }
 
-    nta_keymap_file = homedir + nta_keymap_file;    
+    nta_keymap_file = homedir + nta_keymap_file;
 
     for (int i=1; i< argc; i++) {
     if (strcmp(argv[i], "--report-warn") == 0) 
@@ -47,6 +48,10 @@ void nta_report_determine_levels(int argc, char *argv[]){
     else if (strcmp(argv[i], "--formatting") == 0) 
     {
 			nta_report_allowed_levels[5]=1;
+	}
+    else if (strcmp(argv[i], "--no-execute") == 0) 
+    {
+			nta_noexecute=1;
 	}
     else if (strcmp(argv[i], "-f") == 0) 
     {

@@ -136,9 +136,9 @@ public:
     {
         string expanded_action;
         int new_level = nta_expand(own_action, expanded_action, keylist);
+        nta_report(4," Executing this: " + expanded_action);
         if(!expanded_action.empty()) nta_report(5, "----- Command output begin -----");
-        //system(expanded_action.c_str());
-        cout << expanded_action;
+        if(!nta_noexecute) system(expanded_action.c_str());
         if(!expanded_action.empty()) nta_report(5, "-----  Command output end  -----\n");
         if(new_level!=-1) {
             nta_report(2,"Switching to layer " + to_string(new_level));
