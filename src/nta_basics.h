@@ -22,11 +22,7 @@ void nta_report_determine_levels(int argc, char *argv[]){
         homedir = getpwuid(getuid())->pw_dir;
     }
 
-<<<<<<< HEAD
-    nta_keymap_file = homedir + nta_keymap_file;    
-=======
     nta_keymap_file = homedir + nta_keymap_file;
->>>>>>> cdcc783 (w.i.p.)
 
     for (int i=1; i< argc; i++) {
     if (strcmp(argv[i], "--report-warn") == 0) 
