@@ -5,31 +5,44 @@
 #include <vector>
 #include <stdio.h>
 #include <string.h>
-
+#include <unistd.h>
+#include <pwd.h>
+#include <sys/types.h>
 
 using namespace std;
-string key_file;
-bool nta_report_allowed_levels[6] = {0};
+string nta_keymap_file = "/nta.map";
+
+bool nta_report_allowed_levels[7] = {0, 0, 0, 0, 0, 0, 1};
 
 void nta_report_determine_levels(int argc, char *argv[]){
+    const char *homedir;
+
+    if ((homedir = getenv("HOME")) == NULL) {
+        homedir = getpwuid(getuid())->pw_dir;
+    }
+
+    nta_keymap_file = homedir + nta_keymap_file;
+    
+    printf("%s\n", nta_keymap_file.c_str());
+
     for (int i=1; i< argc; i++) {
-    if (strcmp(argv[i], "--warn") == 0) 
+    if (strcmp(argv[i], "--report-warn") == 0) 
     {
 			nta_report_allowed_levels[0]=1;
 	}
-    else if (strcmp(argv[i], "--error") == 0) 
+    else if (strcmp(argv[i], "--report-error") == 0) 
     {
 			nta_report_allowed_levels[1]=1;
 	}
-    else if (strcmp(argv[i], "--info") == 0) 
+    else if (strcmp(argv[i], "--report-info") == 0) 
     {
 			nta_report_allowed_levels[2]=1;
 	}
-    else if (strcmp(argv[i], "--expand") == 0) 
+    else if (strcmp(argv[i], "--report-expand") == 0) 
     {
 			nta_report_allowed_levels[3]=1;
 	}
-    else if (strcmp(argv[i], "--debug") == 0) 
+    else if (strcmp(argv[i], "--report-debug") == 0) 
     {
 			nta_report_allowed_levels[4]=1;
 	}
@@ -40,7 +53,7 @@ void nta_report_determine_levels(int argc, char *argv[]){
     else if (strcmp(argv[i], "-f") == 0) 
     {
             if(i+1<argc){
-            key_file = argv[i+1];
+            nta_keymap_file = argv[i+1];
             }
             else{
                 printf("No file passed.\n");
@@ -49,7 +62,7 @@ void nta_report_determine_levels(int argc, char *argv[]){
             i++;
 
 	}
-    else if (strcmp(argv[i], "--verbose") == 0) 
+    else if (strcmp(argv[i], "--report-verbose") == 0) 
     {
 			nta_report_allowed_levels[0]=1;
             nta_report_allowed_levels[1]=1;
@@ -57,9 +70,13 @@ void nta_report_determine_levels(int argc, char *argv[]){
             nta_report_allowed_levels[3]=1;
             nta_report_allowed_levels[4]=1;
 	}
-    else if (strcmp(argv[i], "--noexpand") == 0) 
+    else if (strcmp(argv[i], "--report-noexpand") == 0) 
     {
             nta_report_allowed_levels[3]=0;
+	}
+    else if (strcmp(argv[i], "--report-nokeymap") == 0) 
+    {
+			nta_report_allowed_levels[6]=0;
 	}
     else 
     {
@@ -87,6 +104,9 @@ void nta_report(const int type, const string report){
             break;
         case 4:
             printf("[DEBUG] ");
+            break;
+        case 6:
+            printf("[KEYMAP] ");
             break;
         default:
             break;
