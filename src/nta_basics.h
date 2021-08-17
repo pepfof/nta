@@ -21,9 +21,7 @@ void nta_report_determine_levels(int argc, char *argv[]){
         homedir = getpwuid(getuid())->pw_dir;
     }
 
-    nta_keymap_file = homedir + nta_keymap_file;
-    
-    printf("%s\n", nta_keymap_file.c_str());
+    nta_keymap_file = homedir + nta_keymap_file;    
 
     for (int i=1; i< argc; i++) {
     if (strcmp(argv[i], "--report-warn") == 0) 

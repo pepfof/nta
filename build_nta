@@ -1,2 +1,3 @@
+mkdir bin
 g++ ./src/nta_main.cpp -o ./bin/nta
 ./bin/nta $@

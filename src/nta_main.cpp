@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 				masterkey.list_recursively(0, 0);
 				printf("\n");
 			}
-			else if (userinput == "quit") {
+			else if (userinput == "quit" || userinput == "exit" || userinput == "abort") {
 				nta_report(2, "Quit by user");
 				exit(0);
 			}
