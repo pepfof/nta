@@ -9,7 +9,7 @@
 
 using namespace std;
 
-int find_space(const string& s, int position = 0)
+size_t find_space(const string& s, int position = 0)
 {
 	for (int i = position; i < s.size(); ++i)
 	{
@@ -91,6 +91,7 @@ void nta_read_config_to_key(const string file, ntakey& key)
 			catch (const invalid_argument) {
 				nta_report(6, "Key values formatted incorrectly, skipping this line: " + line);
 				ignore = true;
+				continue;
 			}
 		}
 		else
@@ -101,6 +102,7 @@ void nta_read_config_to_key(const string file, ntakey& key)
 			catch (const invalid_argument) {
 				nta_report(6, "Key values formatted incorrectly, skipping this line: " + line);
 				ignore = true;
+				continue;
 			}
 		}
 		if (omega_space != string::npos)
