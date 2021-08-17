@@ -9,7 +9,7 @@
 
 using namespace std;
 
-unsigned int find_space(const string& s, int position = 0)
+int find_space(const string& s, int position = 0)
 {
 	for (int i = position; i < s.size(); ++i)
 	{
@@ -52,7 +52,7 @@ void nta_read_config_to_key(const string file, ntakey& key)
 	vector<string> b = {};
 	bool ignore = 0;
 	int last_spaces = 0;
-	
+
 	while (fin)
 	{
 		string line = "";
@@ -66,7 +66,7 @@ void nta_read_config_to_key(const string file, ntakey& key)
 		{
 			if (spaces > last_spaces)
 			{
-				return;
+				continue;
 			}
 		}
 
