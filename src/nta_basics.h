@@ -15,6 +15,11 @@ string nta_keymap_file = "/nta.map";
 bool nta_report_allowed_levels[7] = {0, 0, 0, 0, 0, 0, 1};
 bool nta_noexecute = 0;
 
+void nta_print_help(){
+const char* usagetext = "usage: nta [OPTION]\n\n Application options:\n	-h, --help		Show this text\n	-f FILE			Use keymap from FILE\n	-t, --test-mode		Print commands instead of executing them\n\n\nReporting options:\n	--report-warn\n	--report-info\n	--report-expand\n	--report-error\n	--report-debug\n	--report-verbose\n	--report-nokeymap\n	--report-noexpand\n";
+printf("%s", usagetext);
+}
+
 void nta_report_determine_levels(int argc, char *argv[]){
     const char *homedir;
 
@@ -49,7 +54,7 @@ void nta_report_determine_levels(int argc, char *argv[]){
     {
 			nta_report_allowed_levels[5]=1;
 	}
-    else if (strcmp(argv[i], "--no-execute") == 0) 
+    else if ((strcmp(argv[i], "-t") == 0) || (strcmp(argv[i], "--test-mode") == 0)) 
     {
 			nta_noexecute=1;
 	}
@@ -83,7 +88,7 @@ void nta_report_determine_levels(int argc, char *argv[]){
 	}
     else 
     {
-        printf("Help text\n");
+        nta_print_help();
         exit(64);
     }
  }
@@ -119,4 +124,6 @@ void nta_report(const int type, const string report){
     }
 };
 
+
 #endif 
+
