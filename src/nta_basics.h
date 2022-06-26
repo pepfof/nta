@@ -12,7 +12,7 @@
 using namespace std;
 string nta_keymap_file = "/nta.map";
 
-bool nta_report_allowed_levels[7] = {0, 0, 0, 0, 0, 0, 1};
+bool nta_report_allowed_levels[7] = {0, 1, 0, 0, 0, 0, 1};
 bool nta_noexecute = 0;
 
 void nta_print_help(){

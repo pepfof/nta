@@ -13,7 +13,7 @@ int nta_expand(string input_string, string& output_string, vector<int> keylist){
     if(!input_string.empty()){
 
     output_string=input_string;
-    int got_level = -1;
+    int got_layer = -1;
     string temp_output_string = output_string;
 
     nta_report(3,"Expanding: " + temp_output_string);
@@ -39,21 +39,21 @@ int nta_expand(string input_string, string& output_string, vector<int> keylist){
         int pos = temp_output_string.rfind("NTA~");
         temp_output_string.erase(pos, 4);
         try{
-        got_level = stoi(temp_output_string.substr(pos, string::npos));
-        string to_delete = to_string(got_level);
+        got_layer = stoi(temp_output_string.substr(pos, string::npos));
+        string to_delete = to_string(got_layer);
         temp_output_string.erase(pos, to_delete.length());
-        nta_report(3,"Found layer to switch to: " + to_string(got_level));
+        nta_report(3,"Layer to switch to: " + to_string(got_layer));
         }
         catch(const invalid_argument) {
-            nta_report(3,"No integer in NTA~, not changing layer");
-            got_level = -1;
+            nta_report(1,"Layer switching failed: no layer number provided");
+            got_layer = -1;
         }
     }
 
     nta_report(3,"After NTA~ pass: " + temp_output_string);
     output_string=temp_output_string;
 
-    return got_level;}
+    return got_layer;}
     return -1;
 };
 
@@ -114,42 +114,43 @@ public:
         if (!numbers_arr.empty())  child_added.add_child_recursively(numbers_arr, actions_arr);
     }
 
-    void list_recursively(int level, int vanity){
+    void list_recursively(int depth, int vanity){
         string temp;
-        if(level == 2) {
+        if(depth == 2) {
         printf("%d: %s\n", own_id, own_action.c_str());
         }
-        else if(level>1){
-            printf("%s",temp.insert(0, (level-2)*2, ' ').c_str());
+        else if(depth>1){
+            printf("%s",temp.insert(0, (depth-2)*2, ' ').c_str());
             printf("%d: %s\n", own_id, own_action.c_str());}
-        else if(level==1){
+        else if(depth==1){
             printf("\nLAYER %d: %s\n", own_id, own_action.c_str());
         }
         int i = 0;
         while (i < child_key.size()) {
-            child_key[i].list_recursively(level+1, (i!=child_key.size()-1)+1);
+            child_key[i].list_recursively(depth+1, (i!=child_key.size()-1)+1);
             i++;
             }
     }
 
-    void execute(vector<int> keylist, int &level)
+    void execute(vector<int> keylist, int &layer)
     {
         string expanded_action;
-        int new_level = nta_expand(own_action, expanded_action, keylist);
-        nta_report(4," Executing this: " + expanded_action);
+        int new_layer = nta_expand(own_action, expanded_action, keylist);
+        nta_report(4,"Executing this: " + expanded_action);
         if(!expanded_action.empty()) nta_report(5, "----- Command output begin -----");
         if(!nta_noexecute) system(expanded_action.c_str());
+        else{printf("%s\n", expanded_action.c_str());}
         if(!expanded_action.empty()) nta_report(5, "-----  Command output end  -----\n");
-        if(new_level!=-1) {
-            nta_report(2,"Switching to layer " + to_string(new_level));
-            level = new_level;
+        if(new_layer!=-1) {
+            nta_report(2,"Switching to layer " + to_string(new_layer));
+            layer = new_layer;
+            nta_report(0,"New layer equal to current layer.");
         }
     }
 
-    void execute_recursively(vector<int> modifiable_keylist, vector<int> original_keylist, int &level)
+    void execute_recursively(vector<int> modifiable_keylist, vector<int> original_keylist, int &layer, int depth)
     {        
-        execute(original_keylist, level);
-
+        execute(original_keylist, layer);
         if(!modifiable_keylist.empty())
         {
             if (has_child(modifiable_keylist[0]))
@@ -157,10 +158,11 @@ public:
                 ntakey found_child = get_child(modifiable_keylist[0]);
                 nta_report(4,"Found child " + to_string(modifiable_keylist[0]) + " in parent " + to_string(own_id)+ " - executing it");
                 modifiable_keylist.erase(modifiable_keylist.begin());
-                found_child.execute_recursively(modifiable_keylist,original_keylist, level);
+                found_child.execute_recursively(modifiable_keylist,original_keylist, layer, depth+1);
             }
             else{
                 nta_report(4,"Child " + to_string(modifiable_keylist[0]) + " in parent " + to_string(own_id)+ " not found");
+                if(depth == 0) nta_report(1,"Your map file is likely broken - looks like it does not contain a layer 0.");
             }
         }
     }

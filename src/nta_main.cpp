@@ -7,7 +7,7 @@
 #include "nta_parser.h"
 using namespace std;
 
-int current_level = 0;
+int current_layer = 0;
 
 int SplitString(string s, vector<int>& v) {
 
@@ -62,13 +62,13 @@ int main(int argc, char* argv[])
 		try {
 			stoi(userinput);
 			if (!SplitString(userinput, ex)) {
-				ex.insert(ex.begin(), current_level);
+				ex.insert(ex.begin(), current_layer);
 				userinput.clear();
-				int temp_level = current_level;
-				if (!ex.empty()) masterkey.execute_recursively(ex, ex, temp_level);
-				if (masterkey.has_child(temp_level)) current_level = temp_level;
-				else if (temp_level != current_level)
-					nta_report(0, "Layer " + to_string(temp_level) + " is not defined, reverting to level " + to_string(current_level));
+				int temp_layer = current_layer;
+				if (!ex.empty()) masterkey.execute_recursively(ex, ex, temp_layer, 0);
+				if (masterkey.has_child(temp_layer)) current_layer = temp_layer;
+				else if (temp_layer != current_layer)
+					nta_report(1, "Layer switching failed: layer " + to_string(temp_layer) + " does not exist.");
 			}
 		}
 		catch (const invalid_argument) {
@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 				printf("\n");
 			}
 			else if (userinput == "quit" || userinput == "exit" || userinput == "abort") {
-				nta_report(2, "Quit by user");
+				nta_report(2, "Quit by command");
 				exit(0);
 			}
 		}

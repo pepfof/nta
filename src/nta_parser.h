@@ -34,7 +34,7 @@ int count_spaces(const string& s)
 		{
 			if (counter % 4 != 0)
 			{
-				nta_report(6, "Inconsistent use of spaces in config file!\nIndentations must be done using 4 spaces per level\nAborting.");
+				nta_report(6, "Incorrect use of spaces in config file!\nIndentations are 4 spaces per level\nAborting.");
 				abort();
 			}
 			return counter;
@@ -85,7 +85,7 @@ void nta_read_config_to_key(const string file, ntakey& key)
 		}
 
 		auto first_space = line.find(' ', extra_space);
-		auto omega_space = find_space(line, extra_space + 1);
+		auto omega_space = line.find(line, extra_space + 1);
 		if (first_space != string::npos)
 		{
 			try
@@ -109,9 +109,9 @@ void nta_read_config_to_key(const string file, ntakey& key)
 				continue;
 			}
 		}
-		if (omega_space != string::npos)
+		if (first_space != string::npos)
 		{
-			str = line.substr(omega_space);
+			str = line.substr(first_space);
 		}
 		else
 		{
