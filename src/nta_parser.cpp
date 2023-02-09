@@ -1,17 +1,8 @@
-#ifndef NTAPARSE_H_   /* Include guard */
-#define NTAPARSE_H_
+#include "nta_parser.hpp"
 
-#include <string>
-#include <vector>
-#include <fstream>
-#include <stdio.h>
-#include "nta_basics.h"
-
-using namespace std;
-
-size_t find_space(const string& s, int position = 0)
+size_t find_space(const string &s, int position = 0)
 {
-	for (int i = position; i < s.size(); ++i)
+	for (unsigned int i = position; i < s.size(); ++i)
 	{
 		if (s[i] != ' ')
 		{
@@ -21,10 +12,10 @@ size_t find_space(const string& s, int position = 0)
 	return string::npos;
 }
 
-int count_spaces(const string& s)
+int count_spaces(const string &s)
 {
 	int counter = 0;
-	for (int i = 0; i < s.size(); ++i)
+	for (unsigned int i = 0; i < s.size(); ++i)
 	{
 		if (s[i] == ' ')
 		{
@@ -43,12 +34,10 @@ int count_spaces(const string& s)
 	return 0;
 }
 
-
-
-void nta_read_config_to_key(const string file, ntakey& key)
+void nta_read_config_to_key(const string file, ntakey &key)
 {
 	ifstream fin(file);
-	
+
 	vector<int> a = {};
 	vector<string> b = {};
 	bool ignore = 0;
@@ -69,11 +58,11 @@ void nta_read_config_to_key(const string file, ntakey& key)
 			{
 				continue;
 			}
-            else
-            {
-                ignore = false;
-            }
-        }
+			else
+			{
+				ignore = false;
+			}
+		}
 
 		for (int i = 0; i <= (last_spaces - spaces); i += 4)
 		{
@@ -85,14 +74,14 @@ void nta_read_config_to_key(const string file, ntakey& key)
 		}
 
 		auto first_space = line.find(' ', extra_space);
-		auto omega_space = line.find(line, extra_space + 1);
 		if (first_space != string::npos)
 		{
 			try
 			{
 				number = stoi(line.substr(0, first_space));
 			}
-			catch (const invalid_argument) {
+			catch (invalid_argument const&)
+			{
 				nta_report(6, "Key values formatted incorrectly, skipping this line: " + line);
 				ignore = true;
 				continue;
@@ -100,10 +89,12 @@ void nta_read_config_to_key(const string file, ntakey& key)
 		}
 		else
 		{
-			try {
+			try
+			{
 				number = stoi(line);
 			}
-			catch (const invalid_argument) {
+			catch (invalid_argument const&)
+			{
 				nta_report(6, "Key values formatted incorrectly, skipping this line: " + line);
 				ignore = true;
 				continue;
@@ -121,8 +112,6 @@ void nta_read_config_to_key(const string file, ntakey& key)
 		a.push_back(number);
 		b.push_back(str);
 
-		key.add_child_recursively(a,b);
+		key.add_child_recursively(a, b);
 	}
 }
-
-#endif
