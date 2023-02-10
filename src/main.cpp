@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 				if (masterkey.has_child(temp_layer))
 					current_layer = temp_layer;
 				else if (temp_layer != current_layer)
-					nta_report(1, "Layer switching failed: layer " + to_string(temp_layer) + " does not exist.");
+					nta_report(NTAREP_ERROR, "Layer switching failed: layer " + to_string(temp_layer) + " does not exist.");
 			}
 		}
 		catch (invalid_argument const&)
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 			}
 			else if (userinput == "quit" || userinput == "exit" || userinput == "abort")
 			{
-				nta_report(2, "Quit by command");
+				nta_report(NTAREP_INFO, "Quit by command");
 				break;
 			}
 		}

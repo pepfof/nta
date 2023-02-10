@@ -1,7 +1,7 @@
 # Huge thx to https://gist.github.com/zobayer1/7265c698d1b024bb7723bc624aeedeb3
 
 # Pre-compiler and Compiler flags
-CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb
+CXX_FLAGS := -Wall -Wextra -std=c++17 -g
 PRE_FLAGS := -MMD -MP
 
 # Project directory structure
@@ -14,6 +14,8 @@ MAINFILE := $(SRC)/main.cpp
 # Build directories and output
 TARGET := $(BIN)/nta
 BUILD := build
+
+ARGS := --report-verbose -f ./test/ntakey.cfg
 
 # Library search directories and flags
 EXT_LIB :=
