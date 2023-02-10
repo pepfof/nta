@@ -24,7 +24,7 @@ int SplitString(string s, vector<int> &v)
 			{
 				v.push_back(stoi(temp));
 			}
-			catch (invalid_argument const&)
+			catch (invalid_argument const &)
 			{
 				nta_report(1, "Input formatted incorrectly, aborting execution");
 				v.clear();
@@ -41,7 +41,7 @@ int SplitString(string s, vector<int> &v)
 	{
 		v.push_back(stoi(temp));
 	}
-	catch (invalid_argument const&)
+	catch (invalid_argument const &)
 	{
 		nta_report(1, "Input formatted incorrectly, aborting execution");
 		v.clear();
@@ -77,19 +77,21 @@ int main(int argc, char *argv[])
 				ex.insert(ex.begin(), current_layer);
 				userinput.clear();
 				int temp_layer = current_layer;
+
 				if (!ex.empty())
-					masterkey.execute_recursively(ex, ex, temp_layer, 0);
+					masterkey.perform_recursively(ex, ex, temp_layer, 0);
+
 				if (masterkey.has_child(temp_layer))
 					current_layer = temp_layer;
-				else if (temp_layer != current_layer)
+				else
 					nta_report(NTAREP_ERROR, "Layer switching failed: layer " + to_string(temp_layer) + " does not exist.");
 			}
 		}
-		catch (invalid_argument const&)
+		catch (invalid_argument const &)
 		{
 			if (userinput == "list")
 			{
-				masterkey.list_recursively(0);
+				masterkey.list_recursively();
 				printf("\n");
 			}
 			else if (userinput == "quit" || userinput == "exit" || userinput == "abort")

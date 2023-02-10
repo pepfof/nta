@@ -1,6 +1,6 @@
 #include "nta_basics.hpp"
 
-long int nta_report_global_allowed_levels = 0;
+long int nta_report_global_allowed_levels = NTAREP_DEFAULT;
 bool nta_global_noexecute = 0;
 
 void nta_print_help()
@@ -83,7 +83,7 @@ void nta_report(const long int type, const string report)
 {
     if (nta_report_global_allowed_levels & type)
     {
-        switch (type)
+        switch (nta_report_global_allowed_levels & type)
         {
         case NTAREP_WARN:
             printf("[WARN] ");
