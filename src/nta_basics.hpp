@@ -14,9 +14,10 @@ using namespace std;
 #define NTA_HELPTEXT "Usage: nta [OPTION]\n"                                         \
 					 "\n"                                                            \
 					 "Application options :\n"                                       \
-					 "   -h, --help Show this text\n"                                \
-					 "   -f FILE Use keymap from FILE\n"                             \
-					 "   -t, --test-mode Print commands instead of executing them\n" \
+					 "   -h --help			Show this text\n"                               \
+					 "   -i FILE			Use this file as input\n"                         \
+					 "   -f FILE			Use keymap from FILE\n"                           \
+					 "   -t	--test-mode 	Print commands instead of executing them\n" \
 					 "\n"                                                            \
 					 "Reporting options :\n"                                         \
 					 "   --report-warn\n"                                            \

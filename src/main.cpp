@@ -62,15 +62,14 @@ int main(int argc, char *argv[])
 	vector<int> ex;
 	vector<int> alpha_int = {};
 	vector<string> alpha_str = {};
-	ntakey masterkey(0, "");
+	ntakey masterkey(0);
 	string userinput = "";
 
 	nta_read_config_to_key(nta_keymap_file, masterkey);
 
-	while (1)
+	while (getline(cin, userinput))
 	{
 		printf("NTA @> ");
-		getline(cin, userinput);
 		try
 		{
 			stoi(userinput);

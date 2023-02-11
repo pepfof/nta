@@ -59,6 +59,19 @@ void nta_report_determine_levels(int argc, char *argv[], string &keymap_file)
 			}
 			i++;
 		}
+		else if (strcmp(argv[i], "-i") == 0)
+		{
+			if (i + 1 < argc)
+			{
+				freopen(argv[i + 1], "r", stdin);
+			}
+			else
+			{
+				printf("No file passed.\n");
+				exit(66);
+			}
+			i++;
+		}
 		else if (strcmp(argv[i], "--report-verbose") == 0)
 		{
 			nta_report_global_allowed_levels |= NTAREP_VERBOSE;
