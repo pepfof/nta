@@ -15,7 +15,7 @@ MAINFILE := $(SRC)/main.cpp
 TARGET := $(BIN)/nta
 BUILD := build
 
-ARGS := --report-error --report-expand -f ./test/ntakey.cfg
+ARGS := --report-debug -f ./test/ntakey.cfg
 
 # Library search directories and flags
 EXT_LIB :=

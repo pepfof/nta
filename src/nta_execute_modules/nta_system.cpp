@@ -2,5 +2,5 @@
 
 void nta_execute_system(string action)
 {
-    system(action.c_str());
+	system(action.c_str());
 }

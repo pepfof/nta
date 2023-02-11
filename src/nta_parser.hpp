@@ -1,5 +1,5 @@
-#ifndef NTAPARSE_H_ /* Include guard */
-#define NTAPARSE_H_
+#ifndef NTAPARSE_HPP_ /* Include guard */
+#define NTAPARSE_HPP_
 
 #include <string>
 #include <vector>

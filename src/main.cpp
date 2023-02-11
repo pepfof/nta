@@ -53,6 +53,8 @@ int SplitString(string s, vector<int> &v)
 int main(int argc, char *argv[])
 {
 
+	nta_keyserver_start();
+
 	string nta_keymap_file = DEFAULT_MAP_FILENAME;
 
 	nta_report_determine_levels(argc, argv, nta_keymap_file);
@@ -101,4 +103,5 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
+	nta_keyserver_end();
 }

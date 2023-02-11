@@ -119,6 +119,8 @@ void nta_read_config_to_key(const string file, ntakey &key)
 			got_act = line.substr(id_end_pos + 1);
 		}
 
+		nta_parse(got_func, got_act);
+
 		// push it baby
 		last_spaces = spaces;
 		tree_values.push_back(got_id);
