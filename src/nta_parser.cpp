@@ -127,7 +127,7 @@ void nta_read_config_to_key(const string file, ntakey &key)
 		tree_actions.push_back(got_act);
 		tree_functions.push_back(got_func);
 
-		//nta_report(NTAREP_PARSE, string(tree_values.begin(), tree_values.end()));
+		// nta_report(NTAREP_PARSE, string(tree_values.begin(), tree_values.end()));
 
 		key.add_child_recursively(tree_values, tree_actions, tree_functions);
 	}

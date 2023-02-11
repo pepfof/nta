@@ -12,21 +12,21 @@
 using namespace std;
 
 #define NTA_HELPTEXT "Usage: nta [OPTION]\n"                                         \
-                     "\n"                                                            \
-                     "Application options :\n"                                       \
-                     "   -h, --help Show this text\n"                                \
-                     "   -f FILE Use keymap from FILE\n"                             \
-                     "   -t, --test-mode Print commands instead of executing them\n" \
-                     "\n"                                                            \
-                     "Reporting options :\n"                                         \
-                     "   --report-warn\n"                                            \
-                     "   --report-info\n"                                            \
-                     "   --report-expand\n"                                          \
-                     "   --report-error \n"                                          \
-                     "   --report-debug\n"                                           \
-                     "   --report-verbose\n"                                         \
-                     "   --report-noparse\n"                                         \
-                     "   --report-noexpand\n";
+					 "\n"                                                            \
+					 "Application options :\n"                                       \
+					 "   -h, --help Show this text\n"                                \
+					 "   -f FILE Use keymap from FILE\n"                             \
+					 "   -t, --test-mode Print commands instead of executing them\n" \
+					 "\n"                                                            \
+					 "Reporting options :\n"                                         \
+					 "   --report-warn\n"                                            \
+					 "   --report-info\n"                                            \
+					 "   --report-expand\n"                                          \
+					 "   --report-error \n"                                          \
+					 "   --report-debug\n"                                           \
+					 "   --report-verbose\n"                                         \
+					 "   --report-noparse\n"                                         \
+					 "   --report-noexpand\n";
 
 #define NTAREP_WARN 0b1L
 #define NTAREP_ERROR 0b10L
