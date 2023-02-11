@@ -92,14 +92,20 @@ void nta_parse_keysig(string &action_to_parse)
 	while (getline(f_in, line))
 	{
 		size_t keycode_pos;
-		if ((keycode_pos = line.find(keycode)) != string::npos)
+		smatch m;
+		regex r("\\b" + keycode + "\\b");
+
+		if (regex_search(line, m, r))
 		{
+			keycode_pos = line.find(keycode);
 			nta_report(NTAREP_PARSE, keycode);
 			nta_report(NTAREP_PARSE, line);
 			keycode_number = line.substr(keycode_pos + keycode.length() + 1);
 			size_t start = keycode_number.find_first_not_of(WHITESPACE);
 			keycode_number = keycode_number.substr(start);
 			nta_report(NTAREP_PARSE, keycode_number);
+			action_to_parse.clear();
+			action_to_parse = keycode_number;
 			return;
 		}
 	}
