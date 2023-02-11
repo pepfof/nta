@@ -63,16 +63,16 @@ void nta_execute_keysig(string action, vector<int> keylist, unsigned int depth)
 		nta_report(NTAREP_ERROR, "Unknown or otherwise incorrect key: " + action);
 	}
 
-	int value = depth > keylist.size() ? 0 : keylist[depth + 1];
+	int value = depth > keylist.size() ? 0 : keylist[depth];
 
-	int i = 0;
+	/* int i = 0;
 	printf("depth: %d\n", depth);
 	while (i < keylist.size())
 	{
 		printf("%d\n", keylist[i]);
 		i++;
 	}
-	printf("value: %d", value);
+	printf("value: %d", value); */
 
 	nta_keyserver_emit(EV_KEY, keycode, value);
 	nta_keyserver_emit(EV_SYN, SYN_REPORT, 0);
@@ -100,11 +100,11 @@ void nta_parse_keysig(string &action_to_parse)
 			size_t start = keycode_number.find_first_not_of(WHITESPACE);
 			keycode_number = keycode_number.substr(start);
 			nta_report(NTAREP_PARSE, keycode_number);
-			break;
+			return;
 		}
 	}
 
-	action_to_parse = keycode_number;
+	action_to_parse = action_to_parse.substr(action_to_parse.find_first_not_of(WHITESPACE));
 
 	return;
 }

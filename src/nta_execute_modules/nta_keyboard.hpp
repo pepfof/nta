@@ -18,7 +18,7 @@
 #define NTAKEY_ID_VENDOR 1
 #define NTAKEY_ID_PRODUCT 1
 
-int ntakey_global_fd;
+extern int ntakey_global_fd;
 
 void nta_keyserver_start();
 
