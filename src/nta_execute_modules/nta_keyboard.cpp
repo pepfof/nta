@@ -13,6 +13,7 @@ void nta_keyserver_start()
 	 * created, to pass key events, in this case the space key.
 	 */
 	ioctl(ntakey_global_fd, UI_SET_EVBIT, EV_KEY);
+	ioctl(ntakey_global_fd, UI_SET_EVBIT, EV_SYN);
 
 	unsigned int i = 0;
 	while (i < 256)
