@@ -14,6 +14,7 @@
 #define KEYCODES_FILE "/usr/include/linux/input-event-codes.h"
 
 
+#define NTAKEY_SCRIPT_FILE "~/nta/keyboard.sh"
 #define NTAKEY_LOCK_FILE "/tmp/nta_keyboard.lock"
 #define NTAKEY_DEVICE_NAME "NTA Virtual Keyboard"
 #define NTAKEY_BUS_TYPE BUS_USB

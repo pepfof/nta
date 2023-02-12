@@ -16,6 +16,7 @@ void nta_keyserver_start()
 	{
 		FILE *lfile = fopen(NTAKEY_LOCK_FILE, "w");
 		fclose(lfile);
+		system(NTAKEY_SCRIPT_FILE);
 	}
 
 	ntakey_global_fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
