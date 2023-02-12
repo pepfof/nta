@@ -13,6 +13,8 @@
 #define WHITESPACE " \n\r\t\f\v"
 #define KEYCODES_FILE "/usr/include/linux/input-event-codes.h"
 
+
+#define NTAKEY_LOCK_FILE "/tmp/nta_keyboard.lock"
 #define NTAKEY_DEVICE_NAME "NTA Virtual Keyboard"
 #define NTAKEY_BUS_TYPE BUS_USB
 #define NTAKEY_ID_VENDOR 1

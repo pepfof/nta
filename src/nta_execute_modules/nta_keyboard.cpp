@@ -6,6 +6,18 @@ void nta_keyserver_start()
 {
 	struct uinput_setup usetup;
 
+	if (access(NTAKEY_LOCK_FILE, F_OK) == 0)
+	{
+		nta_report(NTAREP_ERROR, "Refusing to start program with an existing " + string(NTAKEY_LOCK_FILE));
+		exit(1);
+		//raise(SIGTERM);
+	}
+	else
+	{
+		FILE *lfile = fopen(NTAKEY_LOCK_FILE, "w");
+		fclose(lfile);
+	}
+
 	ntakey_global_fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
 
 	/*
@@ -35,6 +47,7 @@ void nta_keyserver_start()
 
 void nta_keyserver_end()
 {
+	remove(NTAKEY_LOCK_FILE);
 	ioctl(ntakey_global_fd, UI_DEV_DESTROY);
 	close(ntakey_global_fd);
 };

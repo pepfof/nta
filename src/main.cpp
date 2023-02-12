@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <signal.h>
 #include "nta_key.hpp"
 #include "nta_basics.hpp"
 #include "nta_parser.hpp"
@@ -10,6 +11,13 @@ using namespace std;
 #define DEFAULT_MAP_FILENAME "./test/ntakey.cfg"
 
 int current_layer = 0;
+
+void term(int signum)
+{
+	nta_report(NTAREP_INFO, "Quit by signal "+ to_string(signum));
+	nta_keyserver_end();
+	exit(signum);
+}
 
 int SplitString(string s, vector<int> &v)
 {
@@ -53,6 +61,9 @@ int SplitString(string s, vector<int> &v)
 int main(int argc, char *argv[])
 {
 
+	signal(SIGTERM, term);
+	signal(SIGINT, term);
+
 	nta_keyserver_start();
 
 	string nta_keymap_file = DEFAULT_MAP_FILENAME;
@@ -70,7 +81,7 @@ int main(int argc, char *argv[])
 	while (getline(cin, userinput))
 	{
 		nta_report(NTAREP_DEBUG, "INPUT: " + userinput);
-		//printf("NTA @> ");
+		// printf("NTA @> ");
 		try
 		{
 			stoi(userinput);
